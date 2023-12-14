@@ -27,13 +27,13 @@ The Consumer microservice consumes temperature data from the Kafka topic in real
 ```
 temperature-monitoring-app/
 │
-├── producer/
+├── temperature-producer/
 │   ├── src/
 │   ├── Dockerfile
 │   ├── application.properties
 │   └── ...
 │
-├── consumer/
+├── temperature-consumer/
 │   ├── src/
 │   ├── Dockerfile
 │   ├── application.properties
