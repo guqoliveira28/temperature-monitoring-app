@@ -1,0 +1,6 @@
+Start Kafka server:
+
+bin/zookeeper-server-start libexec/config/zookeeper.properties
+
+bin/kafka-server-start libexec/config/server.properties
+
