@@ -1,5 +1,6 @@
 package org.gustavooliveira.proxy;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.QueryParam;
 import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
@@ -12,6 +13,7 @@ import org.gustavooliveira.model.OpenMeteoData;
 @Path("/v1/")
 @Produces(MediaType.APPLICATION_JSON)
 @RegisterRestClient
+@Dependent
 public interface TemperatureProxy {
 
     @GET
