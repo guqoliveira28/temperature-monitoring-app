@@ -34,9 +34,10 @@ public class TemperatureProducer {
             new City(0, "Porto", 41.1496, -8.611),
             new City(1, "New York", 40.7143, -74.006));
 
+    // Populates temperatures into kafka topic
     @Outgoing("temperature-values")
     public Multi<Record<Integer, String>> generate() {
-        return Multi.createFrom().ticks().every(Duration.ofMillis(1000 * SECONDS))
+        return Multi.createFrom().ticks().every(Duration.ofMillis(1000 * (SECONDS / cities.size())))
                 .onOverflow().drop()
                 .map(tick -> {
                     if (currentCityIndex > 1) {
@@ -48,7 +49,6 @@ public class TemperatureProducer {
                     cityTemperature.getTemperatureFromOpenMeteo(city.getName(), city.getLatitude(), city.getLongitude());
                     LOG.infov("cityTemperature: {0} -> {1}", cityTemperature.getCityName(), cityTemperature.getTemperature());
 
-                    LOG.infov("city: {0}, temperature: {1}", cityTemperature.getCityName(), cityTemperature.getTemperature());
                     return Record.of(city.getId(), Instant.now() + ";" + cityTemperature.getCityName() + ";" + cityTemperature.getTemperature());
                 });
     }
